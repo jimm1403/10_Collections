@@ -22,7 +22,7 @@ namespace _10_Collections
             portfolio.AddAsset(stockHP);
             portfolio.AddAsset(stockYHOO);
 
-            IList<Asset> assets = portfolio.GetAssets();
+            IList<IAsset> assets = portfolio.GetAssets();
             Assert.IsTrue(assets.Contains(stockIBM));
             Assert.IsTrue(assets.Contains(stockHP));
             Assert.IsTrue(assets.Contains(stockYHOO));
