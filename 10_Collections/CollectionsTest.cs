@@ -27,7 +27,7 @@ namespace _10_Collections
             Assert.IsTrue(assets.Contains(stockHP));
             Assert.IsTrue(assets.Contains(stockYHOO));
         }
-        /*
+        
         [TestMethod]
         public void CanGetAssetByName()
         {
@@ -42,7 +42,7 @@ namespace _10_Collections
 
             Assert.IsNull(portfolio.GetAssetByName("QQQQ"));
         }
-
+        
         [TestMethod]
         public void CanCompareByName()
         {
@@ -51,7 +51,7 @@ namespace _10_Collections
             Assert.AreEqual(0, comparator.Compare(stockIBM, stockIBM));
             Assert.IsTrue(comparator.Compare(stockIBM, stockYHOO) < 0);
         }
-
+        
         [TestMethod]
         public void CanSortByName()
         {
@@ -59,18 +59,19 @@ namespace _10_Collections
             portfolio.AddAsset(stockIBM);
             portfolio.AddAsset(stockHP);
             portfolio.AddAsset(stockYHOO);
+            
 
-            IList<Asset> assets = portfolio.GetAssetsSortedByName();
+            IList<IAsset> assets = portfolio.GetAssetsSortedByName();
             Assert.IsTrue(stockHP.Equals(assets[0]));
             Assert.IsTrue(stockIBM.Equals(assets[1]));
             Assert.IsTrue(stockYHOO.Equals(assets[2]));
         }
-
+        
         //    /**
         //* the ValueComparator sorts in *descending* order of value
         //* (most valuable comes first)
         //*/
-        /*
+        
         [TestMethod]
         public void CanCompareByValue()
         {
@@ -79,7 +80,7 @@ namespace _10_Collections
             Assert.AreEqual(0, comparator.Compare(stockIBM, stockIBM));
             Assert.IsTrue(comparator.Compare(stockYHOO, stockHP) < 0);
         }
-
+        
         [TestMethod]
         public void CanSortByValue()
         {
@@ -88,13 +89,13 @@ namespace _10_Collections
             portfolio.AddAsset(stockHP);
             portfolio.AddAsset(stockYHOO);
             
-            IList<Asset> stocks = portfolio.GetAssetsSortedByValue();
+            IList<IAsset> stocks = portfolio.GetAssetsSortedByValue();
             Assert.AreEqual(stockYHOO, stocks[0]);
             Assert.AreEqual(stockHP, stocks[1]);
             Assert.AreEqual(stockIBM, stocks[2]);
             
         }
-
+        
         [TestMethod]
         [ExpectedException(typeof(NotSupportedException), "Unable to add an asset to the returned collection. Collection is ReadOnly")]
         public void CannotAddAssetToFacade()
@@ -103,9 +104,9 @@ namespace _10_Collections
             portfolio.AddAsset(stockIBM);
             portfolio.AddAsset(stockHP);
 
-            IList<Asset> assets = portfolio.GetAssets();
+            IList<IAsset> assets = portfolio.GetAssets();
             assets.Add(stockYHOO);
         }
-        */
+        
     }
 }

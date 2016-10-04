@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace _10_Collections
 {
-    interface IAsset
+    public interface IAsset
     {
+        string Symbol { get; }
+        int Id { get; }
         double GetValue();
+         
     }
 }

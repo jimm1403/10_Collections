@@ -1,106 +1,93 @@
-﻿using System;
-
+﻿using System.Globalization;
 
 namespace _10_Collections
 {
-    internal class Stock : IAsset
+    public class Stock : IAsset
     {
-        private string _symbol;
-        private double _pricePerShare;
-        private double _numShares;
+        //Fields
+        private string symbol;
+        private double pricepershare;
+        private int numshares;
+        private int id;
 
+        //Constructors
+        public Stock(string symbol, double pricepershare, int numshares)
+        {
+            this.symbol = symbol;
+            this.pricepershare = pricepershare;
+            this.numshares = numshares;
+        }
         public Stock()
         {
 
         }
 
-        public Stock (string _name, double _price, double _shares)
-        {
-            _symbol = _name;
-            _pricePerShare = _price;
-            _numShares = _shares;
-        }
-
-        public double PricePerShare
-        {
-            get
-            {
-                return _pricePerShare;
-            }
-            internal set
-            {
-                _pricePerShare = value;
-            }
-        }
-
-        public string Symbol
-        {
-            get
-            {
-                return _symbol;
-            }
-            internal set
-            {
-                _symbol = value;
-            }
-        }
-
-        public double NumShares
-        {
-            get
-            {
-                return _numShares;
-            }
-            internal set
-            {
-                _numShares = value;
-            }
-        }
-
+        //Methods
         public double GetValue()
         {
-            
-            return _pricePerShare * _numShares;
+            return pricepershare * numshares;
         }
 
-        internal static double TotalValue(IAsset[] stocks)
+        //Moved method to Portfolio for refactoring.
+        //public static double TotalValue(IAsset[] stocks)
+        //{
+        //    double sumvalue = 0;
+        //    foreach (IAsset stock in stocks)
+        //    {
+        //        sumvalue += stock.GetValue();
+        //    }
+        //    return sumvalue;
+
+        //}
+
+        public override string ToString()
         {
-            double _totalValue = 0;
+            //"Stock[symbol=ABC,pricePerShare=12.23,numShares=50]"
+            string ppsstring = pricepershare.ToString(CultureInfo.InvariantCulture);
 
-            for (int i = 0; i < stocks.Length; i++)
-            {
-                _totalValue += stocks[i].GetValue();
-            }
-
-            return _totalValue;
-        }
-
-        override public string  ToString()
-        {
-            System.Globalization.CultureInfo customCulture = (System.Globalization.CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone();
-            customCulture.NumberFormat.NumberDecimalSeparator = ".";
-
-            System.Threading.Thread.CurrentThread.CurrentCulture = customCulture;
-
-            return "Stock[symbol=" + _symbol + ",pricePerShare=" + _pricePerShare + ",numShares=" + _numShares + "]";
+            return "Stock[symbol=" + this.symbol + ",pricePerShare="
+                + ppsstring + ",numShares=" + this.numshares + "]";
         }
 
         public override bool Equals(object obj)
         {
-            
-
-            if (obj == null)
-            {
-                return false;
-            }
-
-            return this.ToString().Equals(obj.ToString());
+            Stock s = (Stock)obj;
+            if (this.symbol == s.Symbol && this.pricepershare == s.PricePerShare 
+                && this.numshares == s.NumShares)
+            { return true; }
+            else
+            { return false; }
         }
 
         public override int GetHashCode()
         {
-            return this.ToString().GetHashCode();
+            return base.GetHashCode();
         }
 
+        //Properties
+
+        public string Symbol
+        {
+            get { return this.symbol; }
+            set { this.symbol = value; }
+        }
+
+        public double PricePerShare
+        {
+            get { return this.pricepershare; }
+            set { this.pricepershare = value; }
+        }
+
+        public int NumShares
+        {
+            get { return this.numshares; }
+            set { this.numshares = value; }
+        }
+
+        public int Id
+        {
+            get { return this.id; }
+            set { this.id = value; }
+        }
     }
 }
